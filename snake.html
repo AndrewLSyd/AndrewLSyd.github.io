@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Andrew Lau | Snake game</title>
+</head>
+<body>
+    Welcome to this implementation of the classic "Snake" game in JavaScript!
+    Eat food to grow your snake, but don't slither into yourself - it'll be game over.
+    Use the arrow keys to move your snake.
+    <canvas height="500" width="500" style="border:2px solid #000000" id="ctx"></canvas>
+    <script>
+        // initialise variables
+        var ctx = document.getElementById('ctx').getContext('2d');
+        var WIDTH = 500;
+        var HEIGHT = 500;
+        var snakeList, foodList;
+
+        ctx.font = "20px Calibri"
+        ctx.fillText("Hello world", 150, 250); //fill text at (150, 250)
+
+        // define snake object {} denotes object
+        var snakeBody = {
+            width: 20,
+            height: 20,
+            color: 'orange'
+        };
+
+        var food = {
+            width: 20,
+            height: 20,
+            color: "orange"
+        };
+
+        // keyboard input handler
+        document.onkeydown = function(event){
+            // 0 left
+            // 1 up
+            // 2 right
+            // 3 down
+            if (event.keyCode == 37){
+                console.log("left arrow pressed");
+            }
+            if (event.keyCode == 38){
+                console.log("up arrow pressed");
+            }
+            if (event.keyCode == 39){
+                console.log("right arrow pressed");
+            }
+            if (event.keyCode == 40){
+                console.log("down arrow pressed");
+            }
+        }
+
+        // draw functions
+        drawSnake = function(sb, i){
+            ctx.save();
+            if (i == 0){ctx.fillStyle = "black";}
+            else {ctx.fillStyle = snakeBody.color;}
+            ctx.fillRect(sb.x, sb.y, snakeBody.width, snakeBody.height);
+            ctx.restore();
+        }
+
+        drawFood = function(f, i){
+            ctx.save();
+            ctx.fillStyle = f.color;
+            ctx.fillRect(f.x, f.y, food.width, food.height);
+            ctx.restore();
+        }
+
+        // update position of snake body objects in snake list to 
+        // take the position of the the earlier body object in the
+        // snake list. The snake body simply follows the head.
+        updateSnakeList = function(){
+            // similar to python: for i in range(len(snakeList) - 1):
+            for (var i = snakeList.length - 1; i>= 0; i --)
+                if (direction == 0){
+                    
+                }
+        }
+
+        startGame = function(){
+            snakeList = [
+                {x:220, y:200},
+                {x:210, y:200},
+                {x:200, y:200},
+            ];
+            foodList = [];
+
+            snakeList.forEach(drawSnake);
+        }
+
+        startGame();
+
+    </script>
+</body>
+</html>
