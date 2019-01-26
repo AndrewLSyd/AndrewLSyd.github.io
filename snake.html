@@ -5,9 +5,9 @@
     <title>Andrew Lau | Snake game</title>
 </head>
 <body>
-    Welcome to this implementation of the classic "Snake" game in JavaScript!
-    Eat food to grow your snake, but don't slither into yourself - it'll be game over.
-    Use the arrow keys to move your snake.
+    Welcome to this implementation of the classic "Snake" game in JavaScript! <br><br>
+    Eat food to grow your snake, but don't slither into yourself - it'll be game over. <br><br>
+    Use the arrow keys to move your snake. <br><br>
     <canvas height="500" width="500" style="border:2px solid #000000" id="ctx"></canvas>
     <script>
         // initialise variables
@@ -15,6 +15,7 @@
         var WIDTH = 500;
         var HEIGHT = 500;
         var snakeList, foodList;
+        var direction = 999;
 
         ctx.font = "20px Calibri"
         ctx.fillText("Hello world", 150, 250); //fill text at (150, 250)
@@ -23,7 +24,8 @@
         var snakeBody = {
             width: 20,
             height: 20,
-            color: 'orange'
+            color: 'orange',
+            speed: 2
         };
 
         var food = {
@@ -40,16 +42,21 @@
             // 3 down
             if (event.keyCode == 37){
                 console.log("left arrow pressed");
+                direction = 0;
             }
-            if (event.keyCode == 38){
+            else if (event.keyCode == 38){
                 console.log("up arrow pressed");
+                direction = 1;
             }
-            if (event.keyCode == 39){
+            else if (event.keyCode == 39){
                 console.log("right arrow pressed");
+                direction = 2;
             }
-            if (event.keyCode == 40){
+            else if (event.keyCode == 40){
                 console.log("down arrow pressed");
+                direction = 3;
             }
+            console.log(direction)
         }
 
         // draw functions
@@ -72,11 +79,71 @@
         // take the position of the the earlier body object in the
         // snake list. The snake body simply follows the head.
         updateSnakeList = function(){
-            // similar to python: for i in range(len(snakeList) - 1):
-            for (var i = snakeList.length - 1; i>= 0; i --)
+            // loop from the length of snakeList - 1 by decrements of 1 until i >= 0
+            for (var i = snakeList.length - 1; i>= 0; i --){
+                // left
                 if (direction == 0){
-                    
+                    // check if snake's head
+                    if (i == 0){
+                        snakeList[i].x = snakeList[i].x - snakeBody.speed;
+                        if (snakeList[i].x < 0){
+                            snakeList[i].x = WIDTH;
+                        }
+                    }
+                    // otherwise, for snake's body
+                    else{
+                        snakeList[i].x = snakeList[i - 1].x;
+                        snakeList[i].y = snakeList[i - 1].y;
+                    }
                 }
+                // up
+                else if (direction == 1){
+                    // check if snake's head
+                    if (i == 0){
+                        snakeList[i].y = snakeList[i].y - snakeBody.speed;
+                        if (snakeList[i].y < 0){
+                            snakeList[i].y = HEIGHT;
+                        }
+                    }
+                    // otherwise, for snake's body
+                    else{
+                        snakeList[i].x = snakeList[i - 1].x;
+                        snakeList[i].y = snakeList[i - 1].y;
+                    }
+                }
+                // right
+                else if (direction == 2){
+                    // check if snake's head
+                    if (i == 0){
+                        snakeList[i].x = (snakeList[i].x + snakeBody.speed) % WIDTH;
+                    }
+                    // otherwise, for snake's body
+                    else{
+                        snakeList[i].x = snakeList[i - 1].x;
+                        snakeList[i].y = snakeList[i - 1].y;
+                    }
+                }
+                // down
+                else if (direction == 3){
+                    // check if snake's head
+                    if (i == 0){
+                        snakeList[i].y = (snakeList[i].y + snakeBody.speed) % HEIGHT;
+                    }
+                    // otherwise, for snake's body
+                    else{
+                        snakeList[i].x = snakeList[i - 1].x;
+                        snakeList[i].y = snakeList[i - 1].y;
+                    }
+                }
+            }
+        }
+
+        updateSnakePosition = function(){
+            // clears rectangle of the canvas
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            // loops through snake list and draws each segment
+            updateSnakeList(snakeList);
+            snakeList.forEach(drawSnake);
         }
 
         startGame = function(){
@@ -86,12 +153,13 @@
                 {x:200, y:200},
             ];
             foodList = [];
-
-            snakeList.forEach(drawSnake);
+            // calls updateSnakePosition every 500ms
+            setInterval(updateSnakePosition, 20) // call myFun every 1000 ms, 1FPS
         }
 
         startGame();
-
+        // setInterval(updateSnakeList, 100) // call myFun every 1000 ms, 1FPS
+        // setInterval(drawSnake, 100) // call myFun every 1000 ms, 1FPS
     </script>
 </body>
 </html>
