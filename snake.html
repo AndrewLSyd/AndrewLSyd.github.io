@@ -22,10 +22,10 @@
 
         // define snake object {} denotes object
         var snakeBody = {
-            width: 20,
-            height: 20,
+            width: 10,
+            height: 10,
             color: 'orange',
-            speed: 2
+            speed: 10
         };
 
         var food = {
@@ -151,10 +151,15 @@
                 {x:220, y:200},
                 {x:210, y:200},
                 {x:200, y:200},
+                {x:190, y:200},
+                {x:180, y:200},
+                {x:170, y:200},
+                {x:160, y:200},
+                {x:150, y:200}
             ];
             foodList = [];
             // calls updateSnakePosition every 500ms
-            setInterval(updateSnakePosition, 20) // call myFun every 1000 ms, 1FPS
+            setInterval(updateSnakePosition, 75) // call myFun every 1000 ms, 1FPS
         }
 
         startGame();
