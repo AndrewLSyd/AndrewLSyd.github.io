@@ -380,7 +380,7 @@ $(document).ready(function () {
 <h1>The Power Set</h1>
 <p>The power set is a set of all subsets of a set (including the empty set and itself). For a set with <span class="math inline">\(n\)</span> distinct elements, the power set will have <span class="math inline">\(2^n\)</span> elements. For example, for the set <span class="math inline">\(S\)</span>:</p>
 <p><span class="math display">\[ S = \{\{a\}, \{b\}, \{c\}\}\]</span></p>
-<p>The power set of $latex S $ is:</p>
+<p>The power set of <span class="math inline">\(S\)</span> is:</p>
 <p><span class="math display">\[ \{\{\}, \{a\}, \{b\}, \{c\}, \{a, b\}, \{b, c\}, \{a, c\}, \{a, b, c\} \}\]</span></p>
 <div id="generating-power-sets" class="section level2">
 <h2>Generating Power Sets</h2>
@@ -420,7 +420,7 @@ This is the union of the set above with a set of unions of the third element <sp
     return power_set
 print(generate_power_set((&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)))
 # power set of {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}</code></pre>
-<pre><code>## {('b', 'c'), ('a', 'b'), ('a', 'b', 'c'), ('a', 'c'), ('a',), (), ('b',), ('c',)}</code></pre>
+<pre><code>## {('b', 'c'), ('a',), (), ('c',), ('a', 'b'), ('b',), ('a', 'b', 'c'), ('a', 'c')}</code></pre>
 <pre class="python"><code>print(generate_power_set((1, 2, 2)))
 # power set of {1, 2}</code></pre>
 <pre><code>## {(1, 2), (2,), (), (1,)}</code></pre>
